@@ -4,7 +4,7 @@ import java.io.*;
 
 
 public class FileReader {
-    private String getStringValueFromFile(File file){
+    private  String getStringValueFromFile(File file) {
         String str = "";
         try (InputStream input = new FileInputStream(file.getAbsolutePath())) {
             int c;
@@ -16,34 +16,19 @@ public class FileReader {
         }
         return str;
     }
-    public Profile getDataFromFile(File file) {
+
+    public  Profile getDataFromFile(File file) {
         String str = getStringValueFromFile(file);
         String[] strArr = str.split("\n");
-        String name = "";
-        Integer age = 0;
-        String email = "";
-        Long phone = 0L;
+        String[] values = new String[4];
 
         for (int i = 0; i < strArr.length; i++) {
             String[] k = strArr[i].split(" ");
-            switch (i) {
-                case 0:
-                    name = k[1];
-                    break;
-                case 1:
-                    age = Integer.parseInt(k[1]);
-                    break;
-                case 2:
-                    email = k[1];
-                    break;
-                case 3:
-                    phone = Long.valueOf(k[1]);
-                    break;
-            }
-
+            values[i] = k[1];
         }
 
-        return new Profile(name, age, email, phone);
+
+        return new Profile(values[0], Integer.parseInt(values[1]), values[2], Long.valueOf(values[3]));
     }
 
 
